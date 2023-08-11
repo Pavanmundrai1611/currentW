@@ -33,10 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(apiUrl1)
                     .then(response => response.json())
                     .then(data => {
-                        if (data.address && data.address.city) {
-                            selectedLocation = data.address.city;
+                        if (data.address) {
+                            if (data.address.town) {
+                                selectedLocation = data.address.town;
+                            } else if (data.address.city) {
+                                selectedLocation = data.address.city;
+                            }
                         } else {
-                            selectedLocation = 'Town not found';
+                            selectedLocation = 'location not found';
                         }
                         document.querySelector('.location-input').innerHTML = `<h2>Selected location : ${selectedLocation}</h2>`;
                     })
